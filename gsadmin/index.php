@@ -57,7 +57,7 @@ $admin_stat = $db->object("cs_admin", "");
 	.admin-company-login-con ul li .login-input{width:70%; max-width:220px; height:26px; border:0px; background:0; border-left:1px solid #e1e1e1; text-indent:15px; color:#707070; font-size:18px; letter-spacing:-0.25px; vertical-align:middle;}
 	.admin-company-login-con .login-btn-controls{text-align:center; padding-bottom:80px;}
 	.admin-company-login-con .to-login-btn{border:0; background:0; cursor:pointer; width:100%; max-width:370px; height:61px; margin:0px auto; text-align:left; font-family:inherit; color:#fefefe; font-size:18px; letter-spacing:-0.25px; background:#000 url(./images/login_btn_icon.png) no-repeat 92% 50%; text-indent:30px; -webkit-border-radius:30px;-moz-border-radius:30px;-o-border-radius:30px;border-radius:30px;}
-	.admin-company-login-con .to-login-btn span{font-size:16px; opacity:0.4;filter:Alpha(opacity=40); margin-left:10px;}	
+	.admin-company-login-con .to-login-btn span{font-size:16px; opacity:0.4;filter:Alpha(opacity=40); margin-left:10px;}
 	.admin-company-login-con .copyright{text-align:center; color:#fefefe; opacity:0.5;filter:Alpha(opacity=50); letter-spacing:-0.1px;}
 	</style>
 

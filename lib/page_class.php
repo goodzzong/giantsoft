@@ -31,37 +31,37 @@ class Page {
 	}
 
 
-	function bbs( $code, $table, $totalPage, $totalList, $listScale, $pageScale, $startPage, $prexImgName, $nextImgName, $search_item=0, $search_order="") {
+	function bbs( $code, $cate, $table, $totalPage, $totalList, $listScale, $pageScale, $startPage, $prexImgName, $nextImgName, $search_item=0, $search_order="") {
 		if( $totalList > $listScale ) {
 			if( $startPage+1 > $listScale*$pageScale ) {
 				$prePage = $startPage - $listScale * $pageScale;
-				$mv_data=$this->encode("startPage=".$prePage."&code=".$code."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
-				echo "&nbsp;&nbsp;<a href='$_SERVER[PHP_SELF]?bbs_data=$mv_data' onfocus=this.blur()>$prexImgName</a>&nbsp;&nbsp;";
+				$mv_data=$this->encode("startPage=".$prePage."&code=".$code."&cate=".$cate."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
+				echo "<a href='$_SERVER[PHP_SELF]?bbs_data=$mv_data' onfocus=this.blur() class='paging-arrow'><i class='material-icons' title='이전'></i></a>";
 			}
 			for( $j=0; $j<$pageScale; $j++ ) {
 				$nextPage = ($totalPage * $pageScale + $j) * $listScale;
 				$pageNum = $totalPage * $pageScale + $j+1;
 				if( $nextPage < $totalList ) {
 					if( $nextPage!= $startPage ) {
-						$mv_data=$this->encode("startPage=".$nextPage."&code=".$code."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
-						echo "<a href='$_SERVER[PHP_SELF]?bbs_data=$mv_data' onfocus=this.blur()> $pageNum </a>";
+						$mv_data=$this->encode("startPage=".$nextPage."&code=".$code."&cate=".$cate."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
+						echo "<a href='$_SERVER[PHP_SELF]?bbs_data=$mv_data' onfocus=this.blur()>$pageNum</a>";
 					} else {
-						echo "<font color='#000000'>&nbsp;<b>$pageNum</b>&nbsp;</font>";
+						echo "<a href='javascript:;' class='cur'>$pageNum</a>";
 					}
 				}
 			}
 			if( $totalList > (($totalPage+1) * $listScale * $pageScale)) {
 				$nNextPage = ($totalPage+1) * $listScale * $pageScale;
-				$mv_data=$this->encode("startPage=".$nNextPage."&code=".$code."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
-				echo "&nbsp;&nbsp;<a href='$_SERVER[PHP_SELF]?bbs_data=$mv_data' onfocus=this.blur()>$nextImgName</a>&nbsp;&nbsp;";
+				$mv_data=$this->encode("startPage=".$nNextPage."&code=".$code."&cate=".$cate."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
+				echo "<a href='$_SERVER[PHP_SELF]?bbs_data=$mv_data' onfocus=this.blur() class='paging-arrow'><i class='material-icons' title='다음'></i></a>";
 			}
 		}
 		if( $totalList <= $listScale) {
-			echo "<b><font color='#000000'>1</font></b>";
+			echo "<a href='javascript:;' class='cur'>1</a>";
 		}
 	}
 
-	function bbs2( $code, $table, $totalPage, $totalList, $listScale, $pageScale, $startPage, $prexImgName, $nextImgName, $search_item=0, $search_order="") {
+		function bbs2( $code, $table, $totalPage, $totalList, $listScale, $pageScale, $startPage, $prexImgName, $nextImgName, $search_item=0, $search_order="") {
 		if( $totalList > $listScale ) {
 			if( $startPage+1 > $listScale*$pageScale ) {
 				$prePage = $startPage - $listScale * $pageScale;
@@ -90,6 +90,7 @@ class Page {
 			echo "<a href='#' class='bbs-num-bt'></a>";
 		}
 	}
+
 
 	function bbs_page( $code, $table, $totalPage, $totalList, $listScale, $pageScale, $startPage, $prexImgName, $nextImgName, $search_item=0, $search_order="") {
 		if( $totalList > $listScale) {
@@ -173,6 +174,39 @@ class Page {
 			echo "<li class='active'><a href='#none' >1</a></li>";
 		}
 	}
+
+
+	function goods_zzim( $code, $part_idx, $table, $totalPage, $totalList, $listScale, $pageScale, $startPage, $prexImgName, $nextImgName, $search_item=0, $search_order="") {
+		if( $totalList > $listScale ) {
+			if( $startPage+1 > $listScale*$pageScale ) {
+				$prePage = $startPage - $listScale * $pageScale;
+				$mv_data=$this->encode("startPage=".$prePage."&code=".$code."&part_idx=".$part_idx."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
+				echo "<li><a href='$_SERVER[PHP_SELF]?goods_data=$mv_data' onfocus=this.blur()><span aria-hidden='true'>&laquo;</span></a></li>";
+			}
+
+			for( $j=0; $j<$pageScale; $j++ ) {
+				$nextPage = ($totalPage * $pageScale + $j) * $listScale;
+				$pageNum = $totalPage * $pageScale + $j+1;
+				if( $nextPage < $totalList ) {
+					if( $nextPage!= $startPage ) {
+						$mv_data=$this->encode("startPage=".$nextPage."&code=".$code."&part_idx=".$part_idx."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
+						echo "<li><a href='$_SERVER[PHP_SELF]?goods_data=$mv_data' onfocus=this.blur()>$pageNum</a></li>";
+					} else {
+						echo "<li class='active'><a href='#none'>$pageNum</a></li>";
+					}
+				}
+			}
+			if( $totalList > (($totalPage+1) * $listScale * $pageScale)) {
+				$nNextPage = ($totalPage+1) * $listScale * $pageScale;
+				$mv_data=$this->encode("startPage=".$nNextPage."&code=".$code."&part_idx=".$part_idx."&table=".$table."&search_item=".$search_item."&search_order=".$search_order);
+				echo "<li><a href='$_SERVER[PHP_SELF]?goods_data=$mv_data' onfocus=this.blur()><span aria-hidden='true'>&raquo;</span></a></li>";
+			}
+		}
+		if( $totalList <= $listScale) {
+			echo "<li class='active'><a href='#none' >1</a></li>";
+		}
+	}
+
 
 	function gongu( $table, $totalPage, $totalList, $listScale, $pageScale, $startPage, $prexImgName, $nextImgName, $search_item=0, $search_order="") {
 		if( $totalList > $listScale ) {
@@ -304,7 +338,7 @@ class Page {
 			if( $startPage+1 > $listScale*$pageScale ) {
 				$prePage = $startPage - $listScale * $pageScale;
 				$mv_data=$this->encode("startPage=".$prePage."&trade_stat=".$trade_stat."&table=".$table."&search_item_chk=".$search_item_chk."&search_mem_item=".$search_mem_item."&search_trade_item=".$search_trade_item."&search_order=".$search_order."&search_day=".$search_day."&search_day_str=".$search_day_str);
-				echo "&nbsp;&nbsp;<a href='$_SERVER[PHP_SELF]?trade_data=$mv_data' onfocus=this.blur()>$prexImgName</a>&nbsp;&nbsp;";
+				echo "<li><a href='$_SERVER[PHP_SELF]?trade_data=$mv_data' onfocus=this.blur()><span aria-hidden='true'>&laquo;</span></a></li>";
 			}
 
 			for( $j=0; $j<$pageScale; $j++ ) {
@@ -313,20 +347,20 @@ class Page {
 				if( $nextPage < $totalList ) {
 					if( $nextPage!= $startPage ) {
 						$mv_data=$this->encode("startPage=".$nextPage."&trade_stat=".$trade_stat."&table=".$table."&search_item_chk=".$search_item_chk."&search_mem_item=".$search_mem_item."&search_trade_item=".$search_trade_item."&search_order=".$search_order."&search_day=".$search_day."&search_day_str=".$search_day_str);
-						echo "<a href='$_SERVER[PHP_SELF]?trade_data=$mv_data' onfocus=this.blur()> $pageNum </a>";
+						echo "<li><a href='$_SERVER[PHP_SELF]?trade_data=$mv_data' onfocus=this.blur()>$pageNum</a></li>";
 					} else {
-						echo "<font color='#000000'>&nbsp;<b>$pageNum</b>&nbsp;</font>";
+						echo "<li class='active'><a href='#none'>$pageNum</a></li>";
 					}
 				}
 			}
 			if( $totalList > (($totalPage+1) * $listScale * $pageScale)) {
 				$nNextPage = ($totalPage+1) * $listScale * $pageScale;
 				$mv_data=$this->encode("startPage=".$nNextPage."&trade_stat=".$trade_stat."&table=".$table."&search_item_chk=".$search_item_chk."&search_mem_item=".$search_mem_item."&search_trade_item=".$search_trade_item."&search_order=".$search_order."&search_day=".$search_day."&search_day_str=".$search_day_str);
-				echo "&nbsp;&nbsp;<a href='$_SERVER[PHP_SELF]?trade_data=$mv_data' onfocus=this.blur()>$nextImgName</a>&nbsp;&nbsp;";
+				echo "<li><a href='$_SERVER[PHP_SELF]?trade_data=$mv_data' onfocus=this.blur()><span aria-hidden='true'>&raquo;</span></a></li>";
 			}
 		}
 		if( $totalList <= $listScale) {
-			echo "<b><font color='#000000'>1</font></b>";
+			echo "<li class='active'><a href='#none' >1</a></li>";
 		}
 	}
 
@@ -435,11 +469,11 @@ class Page {
 		$img		= "";
 		if( $base < $value) {
 			if( $img_num==1 ){
-				$img		= "<img src='../admin/images/hit1.gif' align='absmiddle' border='0'>";
+			$img		= "<img src='../admin/images/hit1.gif' align='absmiddle' border='0'>";
 			} else if( $img_num==2 ){
-				$img		= "<img src='../admin/images/hit2.gif' align='absmiddle' border='0'>";
+			$img		= "<img src='../admin/images/hit2.gif' align='absmiddle' border='0'>";
 			} else if( $img_num==3 ){
-				$img		= "<img src='../admin/images/hit3.gif' align='absmiddle' border='0'>";
+			$img		= "<img src='../admin/images/hit3.gif' align='absmiddle' border='0'>";
 			}
 		} else {
 			$img		= "";

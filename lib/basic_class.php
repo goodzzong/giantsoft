@@ -92,6 +92,12 @@ class dbConnect {
 		return $str;
 	}
 
+	function myRealEscapeString ( $str ) {
+		$str				= trim( $str );
+		$str				= mysql_real_escape_string( $str );
+		return $str;
+	}
+
 	function addSlash ( $str ) {
 		$str				= trim( $str );
 		$str				= addslashes( $str );

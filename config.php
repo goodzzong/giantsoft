@@ -1,7 +1,7 @@
 <?
 $DB_HOST="localhost";
-$DB_USER="giant_makehome2";
-$DB_PWD="epah8721";
-$DB_NAME="giant_makehome2";
+$DB_USER="root";
+$DB_PWD="secret";
+$DB_NAME="giantsoft";
 $ROOT_DIR=$_SERVER['DOCUMENT_ROOT'];
 ?>
