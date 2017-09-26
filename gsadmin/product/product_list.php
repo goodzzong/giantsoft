@@ -1,19 +1,20 @@
 <?
-$mod	= "product";	
+$mod	= "product";
 $menu	= "product_list";
 include("../header.php");
 include($ROOT_DIR."/lib/page_class.php");
 
-if($_POST[part_code]) {
+if($_POST['part_code']) {
+
 	$part_row=$db->object("cs_part", "where part1_code='$_POST[part_code]' or part2_code='$_POST[part_code]' or part3_code='$_POST[part_code]'", "idx");
-	$_GET[part_idx]=$part_row->idx;
+	$_GET['part_idx']=$part_row->idx;
 }
 // 상품정보변경
-if( $_POST[hidden_goods_idx]) {
+if( $_POST['hidden_goods_idx']) {
 	$db->update("cs_goods", "display='$_POST[display]', main_position='$_POST[main_position]', sub_position='$_POST[sub_position]' where idx='$_POST[hidden_goods_idx]'");
 }
-$mv_data	= $_GET[goods_data];
-$goods_data	= $tools->decode( $_GET[goods_data] );
+$mv_data	= $_GET['goods_data'];
+$goods_data	= $tools->decode( $_GET['goods_data'] );
 if($_GET[idx] )							{	$idx =						$_GET[idx];						}else {	$idx					= $goods_data[idx];}
 if($_GET[part_idx] )				{	$part_idx =			$_GET[part_idx];			}else {	$part_idx			= $goods_data[part_idx];}
 if($_GET[listNo] )					{	$listNo =				$_GET[listNo];					}else {	$listNo				= $goods_data[listNo];}
@@ -23,7 +24,7 @@ if($_POST[search_order] )	{	$search_order =	$_POST[search_order];	}else {	$searc
 ?>
 
 <script language="javascript">
-<!--
+
 function sendit() {
 	var form=document.goods_form;
 		form.submit();
@@ -206,7 +207,7 @@ function goodsRanking(part_idx){
 	var wintop = (screen.height - 500) / 2;
 	window.open("product_ranking.php?part_idx="+part_idx,"","scrollbars=no, width=420, height=460, top="+wintop+", left="+winleft+"");
 }
-//-->
+
 </script>
 
 
@@ -288,7 +289,7 @@ else {
 	$part_name = "전체";
 }
 ?>
-	
+
 	<!-- <a href="javascript:cate_pop('cs_product','icon');" class="btn btn-primary btn-sm active">아이콘 관리</a><br><br> -->
 
 	<table class="table table-bordered table-hover ">
@@ -368,7 +369,7 @@ else {
 		}
 	}
 
-	if( $startPage ) { $listNo = $totalList - $startPage; } else { $listNo = $totalList; }	
+	if( $startPage ) { $listNo = $totalList - $startPage; } else { $listNo = $totalList; }
 	while( $row = mysql_fetch_object($result)) {
 		$form_name++; // 폼네임변경 숫자증가
 		$goods_data = $tools->encode("idx=".$row->idx."&startPage=".$startPage."&part_idx=".$row->part_idx);
@@ -387,7 +388,7 @@ else {
 					}
 				}
 				if($row->sold_out=="y"){
-					echo '<span class="label label-danger">품절</span>';			
+					echo '<span class="label label-danger">품절</span>';
 				}
 			?>
 		</td>

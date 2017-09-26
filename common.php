@@ -6,9 +6,9 @@
 
 	@include($_SERVER['DOCUMENT_ROOT'].'/lib/function.php');
 	include $_SERVER['DOCUMENT_ROOT']."/lib/config_etc.php";
-/*
+
 	@extract($_POST);
 	@extract($_GET);
 	@extract($_SERVER);
-*/
+
 ?>

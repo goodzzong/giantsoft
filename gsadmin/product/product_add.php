@@ -1,5 +1,5 @@
 <?
-$mod	= "product";	
+$mod	= "product";
 $menu	= "product_add";
 include("../header.php");
 
@@ -7,7 +7,7 @@ include$_SERVER['DOCUMENT_ROOT']."/lib/style_class.php";
 include $_SERVER['DOCUMENT_ROOT']."/webeditor/webeditor_script.php";
 ?>
 <script type="text/javascript">
-<!--
+
 // 수량 입력 폼 체크
 function goodsUnlimit() {	if( document.tx_editor_form.unlimit.checked == true ) { document.tx_editor_form.number.value = ""; }}
 function goodsNumber() { document.tx_editor_form.unlimit.checked  = false; }
@@ -37,10 +37,10 @@ function optionCheck() {
 //// 입력 품 VIEW 체크  종료 //////////////////////////////////////////////////////////////////////////////
 
 
-/**************관련 제품 시작**************/		
-function res(){	
+/**************관련 제품 시작**************/
+function res(){
 	var code = $("input[name=code]").val();
-	window.open("zzim_list.php?code="+code,"","width=1000,height=600,scrollbars=yes");	
+	window.open("zzim_list.php?code="+code,"","width=1000,height=600,scrollbars=yes");
 }
 /**************관련 제품 종료**************/
 
@@ -68,18 +68,18 @@ while( $part1_row = mysql_fetch_object($part1_result) ) {
 ?>
 	depth1[i] = "<?=$part1_row->part_name;?>";
 	depth1_value[i] = "<?=$part1_row->part1_code;?>";
-	
+
 	j = 0;
 
 	// depth2 의 배열 초기화
 	<?
 	$part2_result = $db->select( "cs_part", "where part1_code='$part1_row->part1_code' and part_index=2 order by part_ranking asc");
-	while( $part2_row = mysql_fetch_object($part2_result) ) 
+	while( $part2_row = mysql_fetch_object($part2_result) )
 	{
 	?>
 		if ( j == 0 )
 		{
-			depth2[i] = new Array(); 
+			depth2[i] = new Array();
 			depth2_value[i] = new Array();
 			depth3[i] = new Array();
 			depth3_value[i] = new Array();
@@ -87,11 +87,11 @@ while( $part1_row = mysql_fetch_object($part1_result) ) {
 
 		depth2[i][j] = "<?=$part2_row->part_name;?>" ;
 		depth2_value[i][j] = "<?=$part2_row->part2_code;?>";
-		
+
 		k = 0;
 		<?
 		$part3_result = $db->select( "cs_part", "where part2_code='$part2_row->part2_code' and part1_code='$part1_row->part1_code' and part_index=3 order by part_ranking asc");
-		while( $part3_row = mysql_fetch_object($part3_result) ) 
+		while( $part3_row = mysql_fetch_object($part3_result) )
 		{
 		?>
 			if ( k == 0 )
@@ -104,28 +104,28 @@ while( $part1_row = mysql_fetch_object($part1_result) ) {
 		k += 1;
 	    <?}?>
 	 j += 1;
-	<?}?>	
-i += 1;		
+	<?}?>
+i += 1;
 <? }?>
 
 // 선택되었을때 다음 단계 카테고리 출력
 function change(depth, index, target)
 {
 	f = document.tx_editor_form;   // 선택된 Form;
-	
+
 	if ( depth == 1 && index != -1)  // 대분류 선택 시
 	{
 		sp_value = f.select1[index].value;
 		sp_value = sp_value.split(sep);
 		sp_value2 = sp_value[1];
-		
+
 		for ( i = f.select2.length; i >= 0; i-- ) {
-			f.select2[i] = null; 
+			f.select2[i] = null;
 		}
 		tx_editor_form.part_code.value = "카테고리를 선택하세요";
 		if ( depth2[sp_value2] != null )
 		{
-	
+
 			for ( i = 0 ; i <= depth2[sp_value2].length -1 ; i++ )
 			{
 				f.select2.options[i] = new Option(depth2[sp_value2][i],depth2_value[sp_value2][i] + sep + sp_value2 + sep + i );
@@ -142,18 +142,18 @@ function change(depth, index, target)
 
 		// 카테고리 2를 초기화 되면 카테로기 3은 모두 삭제한다.
 		for ( i = f.select3.length; i >= 0; i-- ) {
-			f.select3[i] = null; 
+			f.select3[i] = null;
 		}
 	}
-	else if ( depth == 2 && index != -1 )   // 중분류 선택 시 
+	else if ( depth == 2 && index != -1 )   // 중분류 선택 시
 	{
 		sp_value = f.select2[index].value;
 		sp_value = sp_value.split(sep);
 		sp_value2 = sp_value[1];
 		sp_value3 = sp_value[2];
-		
+
 		for ( i = f.select3.length; i >= 0; i-- ) {
-			f.select3[i] = null; 
+			f.select3[i] = null;
 		}
 		tx_editor_form.part_code.value = "카테고리를 선택하세요";
 		if ( depth3[sp_value2][sp_value3] != null )
@@ -180,7 +180,7 @@ function change(depth, index, target)
 	}
 }
 ////  카테고리 선택 폼 설정 종료 //////////////////////////////////////////////////////////////////////////
-//-->
+
 </script>
 
 	<div class="text-right">
@@ -201,9 +201,9 @@ function change(depth, index, target)
 	<colgroup>
 	<col width="15%" title="분류선택">
 	<col width="*" title="카테고리">
-	</colgroup>		
+	</colgroup>
 	<tbody>
-	<tr> 
+	<tr>
 		<th class="text-center">분류선택</th>
 		<td>
 			<table class="table table-bordered">
@@ -211,14 +211,14 @@ function change(depth, index, target)
 			<col width="33%">
 			<col width="33%">
 			<col width="*">
-			</colgroup>		
+			</colgroup>
 			<tbody>
-			<tr> 
+			<tr>
 				<td class="text-center"><span class="btn btn-primary btn-xs btn-grad btn-rect">1차 카테고리</span></td>
 				<td class="text-center"><span class="btn btn-primary btn-xs btn-grad btn-rect">2차 카테고리</span></td>
 				<td class="text-center"><span class="btn btn-primary btn-xs btn-grad btn-rect">3차 카테고리</span></td>
 			</tr>
-			<tr> 
+			<tr>
 				<td>
 					<select  name="select1" onChange='change(1, this.form.select1.selectedIndex, this.form)'  class="form-control"  size="5">
 						<script language = "javascript">
@@ -230,27 +230,27 @@ function change(depth, index, target)
 				<td><select name="select3" onChange='change(3, this.form.select3.selectedIndex, this.form)' class="form-control"  size="5"></select></td>
 			</tr>
 			</tbody>
-			</table>	
+			</table>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2"></td>
 	</tr>
-	<tr> 
+	<tr>
 		<th>노출여부</th>
 		<td>
 			<label class="radio-inline"><input type="radio" name="display" value="1" checked>노출</label>&nbsp;
 			<label class="radio-inline"><input type="radio" name="display" value="">미노출</label>&nbsp;&nbsp;
 		</td>
 	</tr>
-	<tr> 
+	<tr>
 		<th>메인노출1</th>
 		<td>
 			<label class="radio-inline"><input type="radio" name="main_position" value="1">ON</label>&nbsp;
 			<label class="radio-inline"><input type="radio" name="main_position" value="" checked>OFF</label>
 		</td>
 	</tr>
-	<tr> 
+	<tr>
 		<th>메인노출2</th>
 		<td>
 			<label class="radio-inline"><input type="radio" name="sub_position" value="1">ON</label>&nbsp;
@@ -283,15 +283,15 @@ function change(depth, index, target)
 		<th>제품명</th>
 		<td><input name="name" type="text" maxlength="100" class="form-control" onKeyDown="partCodeCheck();"></td>
 	</tr>
-	<tr> 
+	<tr>
 		<th>소비자가 <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="" data-original-title="- 쉼표없이 숫자만 입력 하세요"><span class="glyphicon glyphicon-question-sign"></span></button></th>
 		<td><input type="text" name="old_price" class="form-control2 text-right" size="10"> 원</td>
 	</tr>
-	<tr> 
+	<tr>
 		<th>판매가 <button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="right" title="" data-original-title="- 쉼표없이 숫자만 입력 하세요"><span class="glyphicon glyphicon-question-sign"></span></button></th>
 		<td><input type="text" name="shop_price" class="form-control2 text-right" size="10"> 원</td>
 	</tr>
-	<tr style="display:none;"> 
+	<tr style="display:none;">
 		<th>제품 옵션</td>
 		<td>
 			<label class="radio-inline"><input type="radio" name="option_check" value="0" checked onClick="optionCheck()">&nbsp;사용안함</label>&nbsp;&nbsp;
@@ -417,7 +417,7 @@ function change(depth, index, target)
 		</td>
 	</tr>
 
-	<tr> 
+	<tr>
 		<th>제품이미지</th>
 		<th>
 			<table class="table table-bordered">
@@ -435,23 +435,23 @@ function change(depth, index, target)
 				<td><label class="checkbox-inline" style="font-weight:bold"><input type="checkbox" name="images2_check" value="1" checked>확대 이미지</label></td>
 				<td class="text-left"><input name="images2" type="file"> [권장 사이즈 OOO x OOO ]</td>
 			</tr>
-			<!-- <tr> 
+			<!-- <tr>
 				<td><label class="checkbox-inline" style="font-weight:bold"><input type="checkbox" name="add_images1_check" value="1" checked>추가이미지1</label></td>
 				<td class="text-left"><input name="add_images1" type="file"> [권장 사이즈 OOO x OOO ]</td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label class="checkbox-inline" style="font-weight:bold"><input type="checkbox" name="add_images2_check" value="1" checked>추가이미지2</label></td>
 				<td class="text-left"><input name="add_images2" type="file"> [권장 사이즈 OOO x OOO ]</td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label class="checkbox-inline" style="font-weight:bold"><input type="checkbox" name="add_images3_check" value="1" checked>추가이미지3</label></td>
 				<td class="text-left"><input name="add_images3" type="file"> [권장 사이즈 OOO x OOO ]</td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label class="checkbox-inline" style="font-weight:bold"><input type="checkbox" name="add_images4_check" value="1" checked>추가이미지4</label></td>
 				<td class="text-left"><input name="add_images4" type="file"> [권장 사이즈 OOO x OOO ]</td>
 			</tr>
-			<tr> 
+			<tr>
 				<td><label class="checkbox-inline" style="font-weight:bold"><input type="checkbox" name="add_images5_check" value="1" checked>추가이미지5</label></td>
 				<td class="text-left"><input name="add_images5" type="file"> [권장 사이즈 OOO x OOO ]</td>
 			</tr> -->
@@ -459,7 +459,7 @@ function change(depth, index, target)
 			</table>
 		</th>
 	</tr>
-	<!-- <tr> 
+	<!-- <tr>
 		<th>첨부파일</th>
 		<td><input type="file" name="goods_file"></td>
 	</tr> -->
@@ -484,11 +484,11 @@ function change(depth, index, target)
 
 	<h5 class="page-header"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> 제품설명</h5>
 	<table class="table table-bordered">
-		<tr> 
+		<tr>
 			<td><?include $_SERVER['DOCUMENT_ROOT']."/webeditor/webeditor_area.php";?></td>
 		</tr>
 	</table><br>
-	
+
 	<table class="table">
 		<tr>
 			<td class="text-center"><a href="javascript:;" class="btn btn-primary" onClick="Editor.save();" >저장하기</a></td>
@@ -507,19 +507,19 @@ function validForm(editor) {
 	var content = editor.getContent();
 
 	//옵션
-	var option_sold_out1 = document.getElementsByName("option_sold_out1[]"); 
-	var option_sold_out2 = document.getElementsByName("option_sold_out2[]"); 
-	var hidden_option_sold_out1 = document.getElementsByName("hidden_option_sold_out1[]"); 
-	var hidden_option_sold_out2 = document.getElementsByName("hidden_option_sold_out2[]"); 
+	var option_sold_out1 = document.getElementsByName("option_sold_out1[]");
+	var option_sold_out2 = document.getElementsByName("option_sold_out2[]");
+	var hidden_option_sold_out1 = document.getElementsByName("hidden_option_sold_out1[]");
+	var hidden_option_sold_out2 = document.getElementsByName("hidden_option_sold_out2[]");
 
-	for (var i = 0 ; i < option_sold_out1.length; i++) { 
+	for (var i = 0 ; i < option_sold_out1.length; i++) {
 		if(option_sold_out1[i].checked==true){
 			hidden_option_sold_out1[i].value="y";
 		}else if(option_sold_out1[i].checked==false){
 			hidden_option_sold_out1[i].value="";
 		}
 	}
-	for (var i = 0 ; i < option_sold_out2.length; i++) { 
+	for (var i = 0 ; i < option_sold_out2.length; i++) {
 		if(option_sold_out2[i].checked==true){
 			hidden_option_sold_out2[i].value="y";
 		}else if(option_sold_out2[i].checked==false){

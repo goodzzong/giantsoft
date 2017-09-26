@@ -9,8 +9,7 @@ $site_url = "http://" . $_SERVER['HTTP_HOST'];
 $table			= "cs_zzim";
 $listScale		= 1000;
 $pageScale	= 10;
-if( !$startPage ) { $startPage = 0; }
-$totalPage = floor($startPage / ($listScale * $pageScale));
+
 
 $query		= "select * from $table where code='$code'";
 $rs				= mysql_query($query);
@@ -20,7 +19,7 @@ $query = "select * from $table where code='$code'";
 $query.="  order by ranking asc, goods_idx desc";
 $result = mysql_query($query);
 
-if( $startPage ) { $listNo = $totalList - $startPage; } else { $listNo = $totalList; }
+
 ?>
 
 <h5 class="page-header"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> 관련제품</h5>
@@ -52,7 +51,7 @@ if( $startPage ) { $listNo = $totalList - $startPage; } else { $listNo = $totalL
 	<th>제품명</th>
 	<th>노출여부</th>
 	<th>판매가격</th>
-</tr>	
+</tr>
 </thead>
 <tbody>
 <?
@@ -71,7 +70,7 @@ while($row = mysql_fetch_array($result)){
 	<td class="text-center"><?=strtoupper($goods_row->display)?></td>
 	<td class="text-center"><?=number_format($goods_row->shop_price)?></td>
 </tr>
-<? 
+<?
 	$listNo--;
 	}
 ?>
@@ -81,8 +80,8 @@ while($row = mysql_fetch_array($result)){
 <br>
 
 <script type="text/javascript">
-<!--
-function rankingSendit(){	
+
+function rankingSendit(){
 	$("input[name=check_list]").prop('checked', true);
 	var checkboxVal = [];
 	$("input[name=check_list]").each(function(i) {
@@ -92,7 +91,7 @@ function rankingSendit(){
 	var idx			= checkboxVal;
 	var name		= "ranking";
 	var postData =
-		{ 
+		{
 		"dbname": dbname,
 		"idx": idx,
 		"name": name
@@ -102,12 +101,12 @@ function rankingSendit(){
 		url : "../ajax/checkbox.php",
 		type: "post",
 		data: postData,
-		success:function(obj){ 
+		success:function(obj){
 			alert("변경이 완료되었습니다.");
 			zzim_load();
 		}
 	});
 
 }
-//-->
+
 </script>

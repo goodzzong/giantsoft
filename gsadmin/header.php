@@ -4,6 +4,7 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT']."/common.php";
 
 $site_url		= "http://" . $_SERVER['HTTP_HOST'];
+//$site_url		= $_SERVER['DOCUMENT_ROOT'];
 $admin_stat = $db->object("cs_admin","");
 ?>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ $admin_stat = $db->object("cs_admin","");
     <meta name="description" content="">
     <meta name="author" content="">
 
-	<?if( !$_SESSION[ADMIN_USERID] || !$_SESSION[ADMIN_PASSWD]) { $tools->alertJavaGo('경고! 잘못된 접근입니다\n\n로그인 하세요', '/gsadmin/');}?>
+	<?if( !$_SESSION['ADMIN_USERID'] || !$_SESSION['ADMIN_PASSWD']) { $tools->alertJavaGo('경고! 잘못된 접근입니다\n\n로그인 하세요', '/gsadmin/');}?>
 
     <title><?=$admin_stat->shop_name;?></title>
 
@@ -49,12 +50,12 @@ $admin_stat = $db->object("cs_admin","");
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 
-	 <!-- calendar 
+	 <!-- calendar
 	 ==================================================-->
 	<link rel="stylesheet" type="text/css" media="screen" href="<?=$site_url?>/gsadmin/calendar/css/bootstrap-datetimepicker.min.css" />
 	<script type="text/javascript" src="<?=$site_url?>/gsadmin/calendar/js/moment.js"></script>
 	<script type="text/javascript" src="<?=$site_url?>/gsadmin/calendar/js/bootstrap-datetimepicker.js"></script>
-	
+
 
   </head>
   <body>
@@ -74,7 +75,7 @@ $admin_stat = $db->object("cs_admin","");
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/" class="navbar-link" target="_blank">사용자 메인</a></li>
-            <li><?if($ADMIN_USERID){?><a href="<?=$site_url?>/gsadmin/ajax_progress.php?logout=1" class="navbar-link">로그아웃</a><?}?></li>
+            <li><?if($_SESSION['ADMIN_USERID']){?><a href="<?=$site_url?>/gsadmin/ajax_progress.php?logout=1" class="navbar-link">로그아웃</a><?}?></li>
           </ul>
           <ul class="nav navbar-nav navbar-left">
 			<!-- 상단메뉴 -->
@@ -248,7 +249,7 @@ $admin_stat = $db->object("cs_admin","");
 					<a href="<?=$site_url?>/gsadmin/order/trade.php" class="list-group-item <?if(empty($trade_stat)){?>active<?}?>">전체보기</a>
 				<?}?>
 
-					
+
 					 <?if( $mod == "online" ){?>
 						<div class="panel-heading"><h3 class="panel-title">신청서관리</h3></div>
 							<a href="<?=$site_url?>/gsadmin/online/online_list.php" class="list-group-item <?if($menu=="online_list"){?>active<?}?>">온라인 신청서</a>
@@ -272,7 +273,7 @@ $admin_stat = $db->object("cs_admin","");
 					<a href="<?=$site_url?>/gsadmin/stat/crm5.php" class="list-group-item <?if($menu=="crm5"){?>active<?}?>">접속로그</a>
 				 <?}?>
 
-	
+
 		</div><!-- /.panel panel-default -->
 
     </div><!-- /.row -->

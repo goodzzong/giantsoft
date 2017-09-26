@@ -1,7 +1,7 @@
 <?
 include $_SERVER['DOCUMENT_ROOT']."/common.php";
 
-$site_url		= "http://" . $_SERVER['HTTP_HOST'];
+$site_url		= $_SERVER['DOCUMENT_ROOT'];
 $admin_stat = $db->object("cs_admin", "");
 ?>
 <!DOCTYPE html>
@@ -65,7 +65,9 @@ $admin_stat = $db->object("cs_admin", "");
 
 
 	<body class="login" onload="login_form.admin_userid.focus();">
-
+<?
+echo $_SERVER['DOCUMENT_ROOT'];
+?>
 	<form name="login_form" action="admin_login_ok.php" method="post">
 	<div id="adminLoginCon">
 		<div class="admin-company-top-con">
@@ -84,7 +86,7 @@ $admin_stat = $db->object("cs_admin", "");
 	</form>
 
 <script type="text/javascript">
-<!--
+
 function sendit(){
 	var form = document.login_form;
 	if(form.admin_userid.value==""){
@@ -97,10 +99,8 @@ function sendit(){
 		form.submit();
 	}
 }
-//-->
+
 </script>
 
 	</body>
 </html>
-
-
