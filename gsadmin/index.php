@@ -65,9 +65,7 @@ $admin_stat = $db->object("cs_admin", "");
 
 
 	<body class="login" onload="login_form.admin_userid.focus();">
-<?
-echo $_SERVER['DOCUMENT_ROOT'];
-?>
+
 	<form name="login_form" action="admin_login_ok.php" method="post">
 	<div id="adminLoginCon">
 		<div class="admin-company-top-con">
